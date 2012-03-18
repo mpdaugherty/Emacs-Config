@@ -15,3 +15,4 @@
 * Javascript flymake (e.g. highlighting for errors inline)
 * Tabs = spaces
 * Trim whitespace on save
+* Org Mode
