@@ -23,3 +23,13 @@
 ; Delete trailing whitespace on save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+; Add Org Mode
+(require 'org-install)
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+
+; Add all files in the ~/org/ directory to my agenda
+(setq org-agenda-files (list "~/org/todo.org")) ; TODO: Make this list all *.org files in directory, then create one per project
+
