@@ -2,12 +2,12 @@
 
 ### Linux
 
-    git clone git://github.com/mpdaugherty/Emacs-Config.git ~/.emacs-config
+    git clone git@github.com:mpdaugherty/Emacs-Config.git ~/.emacs-config
     echo '(load-file "~/.emacs-config/config.el")' >> ~/.emacs
 
 ### Aquamacs
 
-    git clone git://github.com/mpdaugherty/Emacs-Config.git ~/.emacs-config
+    git clone git@github.com:mpdaugherty/Emacs-Config.git ~/.emacs-config
     echo '(load-file "~/.emacs-config/config.el")' >> ~/Library/Preferences/Aquamacs\ Emacs/Preferences.el
 
 ## Included
