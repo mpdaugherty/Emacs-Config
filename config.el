@@ -32,7 +32,10 @@
 (setq org-log-done t)
 
 ; Add all files in the ~/org/ directory to my agenda
-(setq org-agenda-files (list "~/org/todo.org")) ; TODO: Make this list all *.org files in directory, then create one per project
+(setq org-agenda-files (append
+                        (file-expand-wildcards "~/org/*.org")
+                        (file-expand-wildcards "~/Dropbox/LifePhilosophy/*.org")
+                        (file-expand-wildcards "~/Dropbox/LifePhilosophy/*Review/.org")))
 
 ; Add SLIME for emacs lisp files
 (load-file "~/.emacs-config/modes/slime/slime.el")
