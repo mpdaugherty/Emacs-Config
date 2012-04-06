@@ -33,13 +33,18 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
+; Org mode custom views
+(setq org-agenda-custom-commands
+      '(("g" "Goals and current tasks"
+         ((tags "+goal")
+          (tags-todo "+today")
+          (agenda ""))))) ; TODO I can set filters, custom view settings, etc. in the next argument after this list.
+
 ; Add all files in the ~/org/ directory to my agenda
 (setq org-agenda-files (append
                         (file-expand-wildcards "~/org/*.org")
                         (file-expand-wildcards "~/Dropbox/LifePhilosophy/*.org")
                         (file-expand-wildcards "~/Dropbox/LifePhilosophy/*Review/.org")))
 
-; Add SLIME for emacs lisp files
+; Add SLIME
 (load-file "~/.emacs-config/modes/slime/slime.el")
-(add-to-list 'auto-mode-alist '("\\.el$" . slime-mode))
-(add-to-list 'auto-mode-alist '("\\.lisp$" . slime-mode))
