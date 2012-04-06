@@ -4,6 +4,7 @@
 ; Add more specific folders to the load path
 (add-to-list 'load-path (expand-file-name "~/.emacs-config/packages"))
 (add-to-list 'load-path (expand-file-name "~/.emacs-config/modes"))
+(add-to-list 'load-path (expand-file-name "~/.emacs-config/slime"))
 
 ; When in JS Mode, always run jshint
 (require 'flymake-node-jshint)
@@ -33,3 +34,7 @@
 ; Add all files in the ~/org/ directory to my agenda
 (setq org-agenda-files (list "~/org/todo.org")) ; TODO: Make this list all *.org files in directory, then create one per project
 
+; Add SLIME for emacs lisp files
+(load-file "~/.emacs-config/modes/slime/slime.el")
+(add-to-list 'auto-mode-alist '("\\.el$" . slime-mode))
+(add-to-list 'auto-mode-alist '("\\.lisp$" . slime-mode))
