@@ -18,6 +18,8 @@
 ;(require 'less-css-mode)
 (load-file "~/.emacs-config/modes/less-css-mode.el")
 
+(add-to-list 'auto-mode-alist '("\\.ejs$" . html-mode))
+
 ; Use spaces, not tabs
 (setq-default indent-tabs-mode nil)
 
