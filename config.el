@@ -33,6 +33,13 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
+; Add FlySpell (http://www-sop.inria.fr/members/Manuel.Serrano/flyspell/flyspell.html)
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+(autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
+(autoload 'flyspell-delay-command "flyspell" "Delay on command." t)
+(autoload 'tex-mode-flyspell-verify "flyspell" "" t)
+
+
 ; Org mode custom views
 (setq org-agenda-custom-commands
       '(("g" "Goals and current tasks"
