@@ -51,7 +51,7 @@
 (setq org-agenda-files (append
                         (file-expand-wildcards "~/org/*.org")
                         (file-expand-wildcards "~/Dropbox/LifePhilosophy/*.org")
-                        (file-expand-wildcards "~/Dropbox/LifePhilosophy/*Review/*.org")))
+                        (file-expand-wildcards "~/Dropbox/LifePhilosophy/*Reviews/*.org")))
 
 ; Add SLIME
 (load-file "~/.emacs-config/modes/slime/slime.el")
