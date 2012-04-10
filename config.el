@@ -43,15 +43,24 @@
 ; Org mode custom views
 (setq org-agenda-custom-commands
       '(("g" "Goals and current tasks"
-         ((tags "+goal")
-          (tags-todo "+today")
+         ((tags-todo "+week+goal"
+           ((org-agenda-overriding-header " Week Goals: ")))
+          (tags-todo "+month+goal"
+           ((org-agenda-overriding-header " Month Goals: ")))
+          (tags-todo "+year+goal"
+           ((org-agenda-overriding-header " Year Goals: ")))
           (agenda ""))))) ; TODO I can set filters, custom view settings, etc. in the next argument after this list.
 
 ; Add all files in the ~/org/ directory to my agenda
 (setq org-agenda-files (append
                         (file-expand-wildcards "~/org/*.org")
                         (file-expand-wildcards "~/Dropbox/LifePhilosophy/*.org")
-                        (file-expand-wildcards "~/Dropbox/LifePhilosophy/*Reviews/*.org")))
+                        (delq nil ; this gets us a list of the most recent year, month, and week reviews
+                              (mapcar
+                               (lambda (folder)
+                                 (car (last (sort
+                                       (file-expand-wildcards (concatenate 'string folder "/*.org")) `string-lessp))))
+                              (file-expand-wildcards "~/Dropbox/LifePhilosophy/*Reviews")))))
 
 ; Add SLIME
 (load-file "~/.emacs-config/modes/slime/slime.el")
