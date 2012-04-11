@@ -28,10 +28,14 @@
 
 ; Add Org Mode
 (require 'org-install)
+(require 'org-mobile)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
+
+; Mobile
+(setq org-mobile-directory "~/org/mobile")
 
 ; Add FlySpell (http://www-sop.inria.fr/members/Manuel.Serrano/flyspell/flyspell.html)
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
@@ -49,7 +53,8 @@
            ((org-agenda-overriding-header " Month Goals: ")))
           (tags-todo "+year+goal"
            ((org-agenda-overriding-header " Year Goals: ")))
-          (agenda ""))))) ; TODO I can set filters, custom view settings, etc. in the next argument after this list.
+          (agenda "")))  ; TODO I can set filters, custom view settings, etc. in the next argument after this list.
+        ("n" "Next tasks" tags-todo "+next")))
 
 ; Add all files in the ~/org/ directory to my agenda
 (setq org-agenda-files (append
