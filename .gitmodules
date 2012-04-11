@@ -1,0 +1,3 @@
+[submodule "modes/org-mode"]
+	path = modes/org-mode
+	url = git://orgmode.org/org-mode.git

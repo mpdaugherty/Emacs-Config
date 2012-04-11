@@ -17,7 +17,6 @@
 ; Add Major modes
 ;(require 'less-css-mode)
 (load-file "~/.emacs-config/modes/less-css-mode.el")
-
 (add-to-list 'auto-mode-alist '("\\.ejs$" . html-mode))
 
 ; Use spaces, not tabs
@@ -27,6 +26,7 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ; Add Org Mode
+(setq load-path (cons "~/.emacs-config/modes/org-mode/lisp/" load-path))
 (require 'org-install)
 (require 'org-mobile)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
