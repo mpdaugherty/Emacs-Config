@@ -96,13 +96,14 @@
 ;; Add yasnippets
 (add-to-list 'load-path
               "~/.emacs-config/yasnippet")
-(seq 'yas/snippet-dirs "~/.emacs-config/snippets")
+(setq yas/snippet-dirs "~/.emacs-config/snippets")
 (require 'yasnippet)
 (yas/global-mode 1)
 
 ;; Add django-mode
+(add-to-list 'load-path (expand-file-name "~/.emacs-config/modes/django-mode"))
 (require 'django-html-mode)
 (require 'django-mode)
 (yas/load-directory "~/.emacs-config/modes/django-mode/snippets")
-(add-to-list 'auto-mode-alist '("\\.djhtml$" . django-html-mode))
+(add-to-list 'auto-mode-alist '("\\.dhtml$" . django-html-mode))
 (add-to-list 'auto-mode-alist '("\\.django$" . django-html-mode))
