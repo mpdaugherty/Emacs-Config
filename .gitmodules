@@ -10,3 +10,6 @@
 [submodule "modes/django-mode"]
 	path = modes/django-mode
 	url = https://github.com/myfreeweb/django-mode.git
+[submodule "modes/coffee-mode"]
+	path = modes/coffee-mode
+	url = git://github.com/defunkt/coffee-mode.git

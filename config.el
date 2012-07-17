@@ -107,3 +107,9 @@
 (yas/load-directory "~/.emacs-config/modes/django-mode/snippets")
 (add-to-list 'auto-mode-alist '("\\.dhtml$" . django-html-mode))
 (add-to-list 'auto-mode-alist '("\\.django$" . django-html-mode))
+
+;; Add coffee-mode
+(add-to-list 'load-path "~/.emacs-config/modes/coffee-mode")
+(require 'coffee-mode)
+(add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
+(add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
