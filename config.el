@@ -5,6 +5,7 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs-config/packages"))
 (add-to-list 'load-path (expand-file-name "~/.emacs-config/modes"))
 (add-to-list 'load-path (expand-file-name "~/.emacs-config/slime"))
+(add-to-list 'load-path (expand-file-name "~/.emacs-config/blogging"))
 
 ; When in JS Mode, always run jshint
 (require 'flymake-node-jshint)
@@ -28,21 +29,16 @@
 ; Add Org Mode
 (setq load-path (cons "~/.emacs-config/modes/org-mode/lisp/" load-path))
 (require 'org-install)
-(require 'org-mobile)
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
-
-; Mobile
-(setq org-mobile-directory "~/org/mobile")
 
 ; Add FlySpell (http://www-sop.inria.fr/members/Manuel.Serrano/flyspell/flyspell.html)
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
 (autoload 'flyspell-delay-command "flyspell" "Delay on command." t)
 (autoload 'tex-mode-flyspell-verify "flyspell" "" t)
-
 
 ; Org mode custom views
 (setq org-agenda-custom-commands
@@ -83,16 +79,6 @@
    (org-element-parse-buffer)))
 
 
-;; Add org2blog
-;; Which requires xml-rpx
-(setq load-path (cons "~/.emacs-config/xml-rpc/" (cons "~/.emacs-config/org2blog/" load-path)))
-(require 'xml-rpc)
-(require 'org2blog-autoloads)
-(setq org2blog/wp-blog-alist
-      '(("mpd.com"
-         :url "http://www.mpdaugherty.com/xmlrpc.php"
-         :username "mike")))
-
 ;; Add yasnippets
 (add-to-list 'load-path
               "~/.emacs-config/yasnippet")
@@ -113,3 +99,6 @@
 (require 'coffee-mode)
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 (add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
+
+;; Set up my blogging commands
+(require 'blogging)
