@@ -176,16 +176,33 @@ title. "
                     (if filename
                         filename
                       (buffer-file-name)))))
-     (mapc
-      (lambda (jfile)
-        (if (string= (file-name-extension jfile) "org")
+      (mapc
+       (lambda (jfile)
+         (if (string= (file-name-extension jfile) "org")
             (with-current-buffer (org-get-reprise-file-buffer jfile)
-              ;; It fails for non-visible entries, CONTENT visibility
-              ;; mode ensures that all of them are visible.
+              ;; org-map-entries fails for non-visible entries
+              ;; Set CONTENT visibility mode to ensure all entries are visible
               (org-content)
+              ;; Export all top-level entries with a WEB_CAT property
               (org-map-entries (lambda () (org-reprise-export-entry project))
-                               "WEB_CAT<>\"\""))))
-      (org-publish-get-base-files project)))
+                               "+LEVEL=1+WEB_CAT<>\"\""))))
+       (org-publish-get-base-files project)))
     (org-release-buffers org-reprise-new-buffers)))
+
+(defun org-reprise-export-entry-test (project)
+  "Outputs the headings that would have become entries"
+  (let* ((props (org-entry-properties nil 'standard))
+         (time (or (org-entry-get (point) "POST_DATE")
+                   (org-entry-get (point) "SCHEDULED")
+                   (org-entry-get (point) "DEADLINE")
+                   (org-entry-get (point) "TIMESTAMP_IA")))
+         (category (if org-reprise-category
+                       (cdr (assoc org-reprise-category props))
+                     nil)))
+    (when time
+      (let* ((heading (org-get-heading t))
+             )
+        (message heading)))))
+
 
 (provide 'org-reprise)
