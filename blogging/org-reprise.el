@@ -70,7 +70,6 @@ nil.")
           (while (re-search-forward
                   "<pre\\(.*?\\)>\\(\\(.\\|[[:space:]]\\|\\\n\\)*?\\)</pre.*?>"
                   nil t 1)
-            (message "++++++++")
             (setq code (match-string-no-properties 2))
             (if (save-match-data
                   (string-match "example" (match-string-no-properties 1)))
@@ -92,7 +91,7 @@ nil.")
             (replace-match
              (shell-command-to-string
               (format "source ~/.virtualenvs/blog/bin/activate && echo -e '%S' | pygmentize -l %s -f html" code lang))
-             nil t)(message "======")))
+             nil t)))
         (setq html (buffer-substring-no-properties (point-min) (point-max))))))
   html)
 
