@@ -54,6 +54,8 @@
   (shell-command "mkdir ~/blog/reprise/source")
   (shell-command "mkdir ~/blog/reprise/source/static")
   (org-reprise-export-blog "~/blog/source/blog.org")
+  (org-publish (assoc "org-static" org-publish-project-alist))
+  (org-publish (assoc "html-files" org-publish-project-alist))
   (shell-command "source ~/.virtualenvs/blog/bin/activate && python ~/blog/reprise/reprise.py"))
 
 (provide 'blogging)
