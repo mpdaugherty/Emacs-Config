@@ -90,7 +90,9 @@ nil.")
                 (setq code (replace-match "&" t t code))))
             (replace-match
              (shell-command-to-string
-              (format "source ~/.virtualenvs/blog/bin/activate && echo -e '%S' | pygmentize -l %s -f html" code lang))
+              ; Use single-quote around %s to prevent the shell from interpreting the
+              ; output in any way
+              (format "source ~/.virtualenvs/blog/bin/activate && echo '%s' | pygmentize -l %s -f html" code lang))
              nil t)))
         (setq html (buffer-substring-no-properties (point-min) (point-max))))))
   html)
