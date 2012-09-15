@@ -100,5 +100,10 @@
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 (add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
 
+;; Add zen-coding mode
+(add-to-list 'load-path (expand-file-name "~/.emacs-config/modes/django-mode"))
+(require 'zencoding-mode)
+(add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
+
 ;; Set up my blogging commands
 (require 'blogging)

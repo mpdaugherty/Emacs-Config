@@ -13,3 +13,6 @@
 [submodule "modes/coffee-mode"]
 	path = modes/coffee-mode
 	url = git://github.com/defunkt/coffee-mode.git
+[submodule "modes/zen-mode"]
+	path = modes/zen-mode
+	url = https://github.com/rooney/zencoding.git
