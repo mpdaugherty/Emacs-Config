@@ -104,6 +104,7 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs-config/modes/django-mode"))
 (require 'zencoding-mode)
 (add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
+(add-hook 'html-helper-mode-hook 'zencoding-mode) ;; Auto-start on html markup mode
 
 ;; Set up my blogging commands
 (require 'blogging)
