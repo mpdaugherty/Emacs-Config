@@ -20,6 +20,15 @@
 (load-file "~/.emacs-config/modes/less-css-mode.el")
 (add-to-list 'auto-mode-alist '("\\.ejs$" . html-mode))
 
+;(require 'scss-mode)
+(load-file "~/.emacs-config/modes/scss-mode.el")
+; Add my sass binary to emacs
+(autoload 'scss-mode "scss-mode")
+(add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
+(add-to-list 'auto-mode-alist '("\\.sass\\'" . scss-mode))
+(setq scss-sass-command "/Users/mpdaugherty/.rvm/gems/ruby-1.9.3-p194/bin/sass")
+(setq scss-compile-at-save nil)
+
 ; Use spaces, not tabs
 (setq-default indent-tabs-mode nil)
 
