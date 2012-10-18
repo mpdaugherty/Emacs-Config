@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: logging
+# key: log
+# binding: direct-keybinding
+# author: Michael P. Daugherty (mpdaugherty)
+# --
+
+import logging
+log = logging.getLogger(__name__)
+
