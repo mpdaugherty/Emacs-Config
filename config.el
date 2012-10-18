@@ -117,3 +117,9 @@
 
 ;; Set up my blogging commands
 (require 'blogging)
+
+;; Set up templates for different types of files
+(auto-insert-mode)  ;;; Adds hook to find-files-hook
+(setq auto-insert-directory "~/.emacs-config/file_templates/") ;;; Or use custom, *NOTE* Trailing slash important
+(setq auto-insert-query nil) ;;; If you don't want to be prompted before insertion
+(define-auto-insert "\.py" "python.py")
