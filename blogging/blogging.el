@@ -35,8 +35,8 @@
 	 )
 
         ("html-files"
-         :base-extension "~/blog/source"
-         :base-directory "~/org/"
+         :base-extension "html"
+         :base-directory "~/blog/source"
 	 :publishing-directory "~/blog/reprise/assets/"
 	 :blog-publishing-directory "~/blog/"
 	 :site-root "http://www.mpdaugherty.com"
@@ -58,6 +58,7 @@
   (org-reprise-export-blog "~/blog/source/blog.org")
   (org-publish (assoc "org-static" org-publish-project-alist))
   (org-publish (assoc "html-files" org-publish-project-alist))
-  (shell-command "source ~/.virtualenvs/blog/bin/activate && python ~/blog/reprise/reprise.py"))
+;  (shell-command "source ~/.virtualenvs/blog/bin/activate && python ~/blog/reprise/reprise.py"))
+  (shell-command "python ~/blog/reprise/reprise.py"))
 
 (provide 'blogging)
