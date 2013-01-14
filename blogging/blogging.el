@@ -49,7 +49,12 @@
 
 (defun publish-blog ()
   (interactive)
-  ; Get rid of any remnants of an unsuccessful build; otherwise python fails
+  ; Configure org mode to not export files with a table of contents.
+  ; I'm not sure why the the :table-of-contents setting in the project
+  ; alist doesn't seem to have an effect...
+  (setq org-export-with-toc nil)
+  ; Get rid of any remnants of an unsuccessful build; otherwise python
+  ; fails
   (shell-command "rm -rf ~/blog/reprise/build")
   (shell-command "rm -rf ~/blog/reprise/source/")
   ; Ensure that this directory exists, even though it may be empty; otherwise python fails
@@ -58,7 +63,6 @@
   (org-reprise-export-blog "~/blog/source/blog.org")
   (org-publish (assoc "org-static" org-publish-project-alist))
   (org-publish (assoc "html-files" org-publish-project-alist))
-;  (shell-command "source ~/.virtualenvs/blog/bin/activate && python ~/blog/reprise/reprise.py"))
   (shell-command "python ~/blog/reprise/reprise.py"))
 
 (provide 'blogging)

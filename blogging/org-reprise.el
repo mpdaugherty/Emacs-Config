@@ -138,7 +138,7 @@ nil.")
                 (org-export-region-as-html
                  (1+ (and (org-back-to-heading) (line-end-position)))
                  (org-end-of-subtree)
-                 t 'string (cdr project)))
+                 t 'string)); (cdr project)
           (set-buffer org-buffer)
           (when org-reprise-use-pygments
             (setq html (org-reprise-convert-pre html)))

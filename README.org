@@ -4,6 +4,7 @@
 
 #+BEGIN_SRC shell-script
   git clone git@github.com:mpdaugherty/Emacs-Config.git ~/.emacs-config
+  git submodule update
   echo '(load-file "~/.emacs-config/config.el")' >> ~/.emacs
   sudo pip install pyflakes pep8
 #+END_SRC
@@ -12,6 +13,7 @@
 
 #+BEGIN_SRC shell-script
   git clone git@github.com:mpdaugherty/Emacs-Config.git ~/.emacs-config
+  git submodule update
   echo '(load-file "~/.emacs-config/config.el")' >> ~/Library/Preferences/Aquamacs\ Emacs/Preferences.el
   sudo pip install pyflakes pep8
 #+END_SRC

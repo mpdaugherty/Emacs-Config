@@ -69,12 +69,12 @@
 ; Org mode custom views
 (setq org-agenda-custom-commands
       '(("g" "Goals and current tasks"
-         ((tags-todo "+week+goal"
-           ((org-agenda-overriding-header " Week Goals: ")))
+         ((tags-todo "+year+goal"
+           ((org-agenda-overriding-header " Year Goals: ")))
           (tags-todo "+month+goal"
            ((org-agenda-overriding-header " Month Goals: ")))
-          (tags-todo "+year+goal"
-           ((org-agenda-overriding-header " Year Goals: ")))
+          (tags-todo "+week+goal"
+           ((org-agenda-overriding-header " Week Goals: ")))
           (agenda "")))  ; TODO I can set filters, custom view settings, etc. in the next argument after this list.
         ("n" "Next tasks" tags-todo "+next")))
 
@@ -143,3 +143,6 @@
 (setq auto-insert-directory "~/.emacs-config/file_templates/") ;;; Or use custom, *NOTE* Trailing slash important
 (setq auto-insert-query nil) ;;; If you don't want to be prompted before insertion
 (define-auto-insert "\.py" "python.py")
+
+;; Turn off flymake for HTML
+(delete '("\\.html?\\'" flymake-xml-init) flymake-allowed-file-name-masks)
