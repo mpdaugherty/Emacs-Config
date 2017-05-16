@@ -31,8 +31,54 @@ pycheckers:
 #+END_SRC
 
 * Included
-
- * Javascript flymake (e.g. highlighting for errors inline)
- * Tabs = spaces
  * Trim whitespace on save
  * Org Mode
+ * Custom blogging tools for MPD (not enabled)
+   #+BEGIN_SRC emacs-lisp
+     (require 'blogging)
+   #+END_SRC
+* Not Included (that used to be here)
+ - Javascript flymake
+ - flymake-cursor
+ - Python flymake
+ - FlySpell
+ - Tabs = spaces (indent-tabs-mode)
+ - SLIME
+ - yasnippets
+ - Custom org mode and goals
+   #+BEGIN_SRC emacs-lisp
+     ; Org mode custom views
+     (setq org-agenda-custom-commands
+           '(("g" "Goals and current tasks"
+              ((tags-todo "+year+goal"
+                ((org-agenda-overriding-header " Year Goals: ")))
+               (tags-todo "+month+goal"
+                ((org-agenda-overriding-header " Month Goals: ")))
+               (tags-todo "+week+goal"
+                ((org-agenda-overriding-header " Week Goals: ")))
+               (agenda "")))  ; TODO I can set filters, custom view settings, etc. in the next argument after this list.
+             ("n" "Next tasks" tags-todo "+next")))
+
+     ; Add all files in the ~/org/ directory and most recent reviews to my agenda
+     ; Also, make this into an interactive command so I can reload it when I create
+     ; a new review
+     (defun org-reload-agenda-files ()
+       (interactive)
+       (setq org-agenda-files (append
+                               (file-expand-wildcards "~/org/*.org")
+                               (file-expand-wildcards "~/Dropbox/LifePhilosophy/*.org")
+                               (delq nil ; this gets us a list of the most recent year, month, and week reviews
+                                     (mapcar
+                                      (lambda (folder)
+                                        (car (last (sort
+                                                    (file-expand-wildcards (concatenate 'string folder "/*.org")) `string-lessp))))
+                                      (file-expand-wildcards "~/Dropbox/LifePhilosophy/*Reviews"))))))
+     (org-reload-agenda-files)
+
+     ; Set up my review commands
+     (defun create-weekly-review ()
+       (interactive)
+       (with-current-buffer
+        (find-file-noselect "~/Dropbox/LifePhilosophy/WeeklyReviews/abc.org")
+        (org-element-parse-buffer)))
+   #+END_SRC
