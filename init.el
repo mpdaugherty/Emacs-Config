@@ -1,5 +1,5 @@
 ;; Load local config (required)
-(load-file "config.local.el")
+(load-file (expand-file-name "./config.local.el" (file-name-directory load-file-name)))
 
 ;; Add the MELPA package archives to my list of packages. MELPA maintains
 ;; a list of packages backed by git and other source control systems.
@@ -13,6 +13,11 @@
 ;; any stable git tags yet.
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+(package-initialize)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
