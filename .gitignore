@@ -1,6 +1,3 @@
-# Compiled python files
-*.pyc
-
 # Emacs temp files
 *~
 \#.*\#
@@ -9,13 +6,12 @@
 .DS_Store
 *.bak
 
-# IDE project files
-/.pydevproject # Pydev.org
-/.settings/org.eclipse.core.resources.prefs # Eclipse
-/.idea # PyCharm
-
-# Stackdumps
-*.stackdump
-
-# Ignore local config files
+# Local config files
 *.local.el
+
+# Auto-save files that emacs creates
+auto-save-list/*
+
+# Files used by Projectile
+projectile-bookmarks.eld
+projectile.cache

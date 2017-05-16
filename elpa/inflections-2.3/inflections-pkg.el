@@ -1,0 +1,1 @@
+(define-package "inflections" "2.3" "convert english words between singular and plural" 'nil :stars '(#("38" 0 2 (font-lock-face paradox-star-face))) :url "https://github.com/eschulte/jump.el" :keywords '("ruby" "rails" "languages" "oop"))
