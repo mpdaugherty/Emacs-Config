@@ -16,3 +16,6 @@
 
 # Stackdumps
 *.stackdump
+
+# Ignore local config files
+*.local.el
