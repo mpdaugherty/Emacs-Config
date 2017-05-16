@@ -1,5 +1,4 @@
 * Installing
-
 ** Linux
 
 #+BEGIN_SRC shell-script
