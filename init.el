@@ -70,5 +70,9 @@
      (add-hook 'haml-mode-hook 'fci-mode)
 
      ;; Display the current column number while typing
-     (column-number-mode 1))))
+     (column-number-mode 1)
+
+     ;; Org-mode config
+     (setq org-log-done 'time) ; Log when items are marked DONE
+     )))
 (put 'upcase-region 'disabled nil)
