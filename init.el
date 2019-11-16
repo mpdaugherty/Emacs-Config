@@ -19,11 +19,18 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 (package-initialize)
 
+;; Enable paradox package manager by default
+(require 'paradox)
+(paradox-enable)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (web-mode scss-mode sass-mode projectile-rails paradox origami markdown-mode helm-projectile fill-column-indicator coffee-mode)))
  '(paradox-automatically-star t))
 
 (custom-set-faces
@@ -32,6 +39,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; Turn off tab mode & set standard indentation unless overridden to 2 spaces
+(setq-default indent-tabs-mode nil)
+(setq standard-indent 2)
 
 ;; M/ELPA packages are loaded after init.el has run and before 'after-init-hook
 ;; Therefore, do all customization in a lambda that runs after 'after-init-hook
@@ -76,3 +87,15 @@
      (setq org-log-done 'time) ; Log when items are marked DONE
      )))
 (put 'upcase-region 'disabled nil)
+
+;; Enable Web Mode automatically for JS & JSX files (for React)
+(add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
+;; And add syntax highlighting
+(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+;; 2-space indentation default
+(defun web-mode-init-hook ()
+  "Hooks for Web mode.  Adjust indent."
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-js-indent-offset 2)
+  (setq js-indent-level 2))
+(add-hook 'web-mode-hook  'web-mode-init-hook)
