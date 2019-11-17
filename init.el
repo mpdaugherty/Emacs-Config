@@ -1,3 +1,6 @@
+;;; init.el --- Initialization file for Emacs
+;;; Commentary: Emacs Startup File --- initialization for Emacs
+
 ;; Load local config (required)
 (load-file (expand-file-name "./config.local.el" (file-name-directory load-file-name)))
 
@@ -7,12 +10,6 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa-stable" . "https://stable.melpa.org/packages/"))
-
-;; So far, MELPA unstable is only used for
-;; https://github.com/bbatsov/helm-projectile since the author has not added
-;; any stable git tags yet.
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
 
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
@@ -30,7 +27,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (web-mode scss-mode sass-mode projectile-rails paradox origami markdown-mode helm-projectile fill-column-indicator coffee-mode)))
+    (add-node-modules-path flycheck web-mode scss-mode sass-mode projectile-rails paradox origami markdown-mode helm-projectile fill-column-indicator coffee-mode)))
  '(paradox-automatically-star t))
 
 (custom-set-faces
@@ -39,6 +36,17 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; Add flycheck for in-line error checking
+(require 'flycheck)
+(setq-default flycheck-disabled-checkers
+              (append flycheck-disabled-checkers
+                      '(javascript-jshint json-jsonlist)))
+;; Enable eslint checker for web-mode
+(flycheck-add-mode 'javascript-eslint 'web-mode)
+;; Enable flycheck globally
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(add-hook 'flycheck-mode-hook 'add-node-modules-path)
 
 ;; Turn off tab mode & set standard indentation unless overridden to 2 spaces
 (setq-default indent-tabs-mode nil)
