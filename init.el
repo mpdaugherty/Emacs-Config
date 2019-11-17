@@ -16,6 +16,10 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 (package-initialize)
 
+;; On OSX, ensure that the PATH available in Emacs is the same as the current path in the shell
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
 ;; Enable paradox package manager by default
 (require 'paradox)
 (paradox-enable)
@@ -27,7 +31,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (add-node-modules-path flycheck web-mode scss-mode sass-mode projectile-rails paradox origami markdown-mode helm-projectile fill-column-indicator coffee-mode)))
+    (exec-path-from-shell add-node-modules-path flycheck web-mode scss-mode sass-mode projectile-rails paradox origami markdown-mode helm-projectile fill-column-indicator coffee-mode)))
  '(paradox-automatically-star t))
 
 (custom-set-faces
@@ -42,8 +46,6 @@
 (setq-default flycheck-disabled-checkers
               (append flycheck-disabled-checkers
                       '(javascript-jshint json-jsonlist)))
-;; Enable eslint checker for web-mode
-(flycheck-add-mode 'javascript-eslint 'web-mode)
 ;; Enable flycheck globally
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'flycheck-mode-hook 'add-node-modules-path)
@@ -107,3 +109,34 @@
   (setq web-mode-js-indent-offset 2)
   (setq js-indent-level 2))
 (add-hook 'web-mode-hook  'web-mode-init-hook)
+
+
+;; Enable eslint checker for web-mode
+;; (flycheck-add-mode 'javascript-eslint 'web-mode)
+(use-package flycheck
+  :ensure t
+  :config
+  (global-flycheck-mode)
+  ;; Mon
+  ;; disable json-jsonlist checking for json files
+  (setq-default flycheck-disabled-checkers (append flycheck-disabled-checkers '(json-jsonlist)))
+  ;; disable jshint since we prefer eslint checking
+  (setq-default flycheck-disabled-checkers (append flycheck-disabled-checkers '(javascript-jshint)))
+  ;; use eslint with web-mode for jsx files
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  ;; Monkey-patch eslint config exists since the default implementation calls "eslint --print-config ."
+  ;; when the "." isn't supported anymore and it needs to be "eslint --print-config filename.js"
+  (defun flycheck-eslint-config-exists-p ()
+    "Whether there is a valid eslint config for the current buffer."
+    (let* ((executable (flycheck-find-checker-executable 'javascript-eslint))
+           (exitcode (and executable (call-process executable nil nil nil
+                                                   "--print-config" (buffer-file-name)))))
+                                        ;    (message executable)
+                                        ;    (message (buffer-file-name))
+                                        ;    (call-process executable
+                                        ;                  nil
+                                        ;                  "*scratch*"
+                                        ;                  t
+                                        ;                  "--print-config" (buffer-file-name))
+      (eq exitcode 0)))
+  )
