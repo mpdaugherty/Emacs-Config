@@ -31,7 +31,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (exec-path-from-shell add-node-modules-path flycheck web-mode scss-mode sass-mode projectile-rails paradox origami markdown-mode helm-projectile fill-column-indicator coffee-mode)))
+    (emmet-mode exec-path-from-shell add-node-modules-path flycheck web-mode scss-mode sass-mode projectile-rails paradox origami markdown-mode helm-projectile fill-column-indicator coffee-mode)))
  '(paradox-automatically-star t))
 
 (custom-set-faces
@@ -40,15 +40,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-;; Add flycheck for in-line error checking
-(require 'flycheck)
-(setq-default flycheck-disabled-checkers
-              (append flycheck-disabled-checkers
-                      '(javascript-jshint json-jsonlist)))
-;; Enable flycheck globally
-(add-hook 'after-init-hook #'global-flycheck-mode)
-(add-hook 'flycheck-mode-hook 'add-node-modules-path)
 
 ;; Turn off tab mode & set standard indentation unless overridden to 2 spaces
 (setq-default indent-tabs-mode nil)
@@ -110,14 +101,20 @@
   (setq js-indent-level 2))
 (add-hook 'web-mode-hook  'web-mode-init-hook)
 
+;; Add Emmet Mode for fast HTML coding
+(add-hook 'web-mode-hook  'emmet-mode)
 
-;; Enable eslint checker for web-mode
-;; (flycheck-add-mode 'javascript-eslint 'web-mode)
+;; Add flycheck for in-line error checking
+(require 'flycheck)
+
+;; Enable flycheck globally
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(add-hook 'flycheck-mode-hook 'add-node-modules-path)
+
 (use-package flycheck
   :ensure t
   :config
   (global-flycheck-mode)
-  ;; Mon
   ;; disable json-jsonlist checking for json files
   (setq-default flycheck-disabled-checkers (append flycheck-disabled-checkers '(json-jsonlist)))
   ;; disable jshint since we prefer eslint checking
