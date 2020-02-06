@@ -31,7 +31,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (emmet-mode exec-path-from-shell add-node-modules-path flycheck web-mode scss-mode sass-mode projectile-rails paradox origami markdown-mode helm-projectile fill-column-indicator coffee-mode)))
+    (yaml-mode emmet-mode exec-path-from-shell add-node-modules-path flycheck web-mode scss-mode sass-mode projectile-rails paradox origami markdown-mode helm-projectile fill-column-indicator coffee-mode)))
  '(paradox-automatically-star t))
 
 (custom-set-faces
@@ -53,8 +53,7 @@
  (lambda ()
    (progn
      ;; Enable projectile globally
-     ;; (projectile-global-mode)
-     (projectile-global-mode 1)
+     (projectile-mode 1)
 
      ;; Delete trailing whitespace in files when saving
      (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -88,6 +87,19 @@
      (setq org-log-done 'time) ; Log when items are marked DONE
      )))
 (put 'upcase-region 'disabled nil)
+
+;; Enable origami code folding for *.js files
+(add-hook 'find-file-hook
+          (lambda ()
+            (when (string= (file-name-extension buffer-file-name) "js")
+              (origami-mode +1))))
+
+;; Set up origami-mode keybindings
+(add-hook 'origami-mode-hook
+          (lambda ()
+            (message "Setting keymap")
+            (define-key origami-mode-map (kbd "C-'")
+              'origami-toggle-node)))
 
 ;; Enable Web Mode automatically for JS & JSX files (for React)
 (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
