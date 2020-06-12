@@ -31,7 +31,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (yaml-mode emmet-mode exec-path-from-shell add-node-modules-path flycheck web-mode scss-mode sass-mode projectile-rails paradox origami markdown-mode helm-projectile fill-column-indicator coffee-mode)))
+    (dash projectile yaml-mode emmet-mode exec-path-from-shell add-node-modules-path flycheck web-mode scss-mode sass-mode projectile-rails paradox origami markdown-mode helm-projectile fill-column-indicator coffee-mode)))
  '(paradox-automatically-star t))
 
 (custom-set-faces
@@ -88,10 +88,12 @@
      )))
 (put 'upcase-region 'disabled nil)
 
-;; Enable origami code folding for *.js files
+;; Enable origami code folding for *.js, *.svelte, *.rb files
 (add-hook 'find-file-hook
           (lambda ()
-            (when (string= (file-name-extension buffer-file-name) "js")
+            (when (or (string= (file-name-extension buffer-file-name) "js")
+                      (string= (file-name-extension buffer-file-name) "svelte")
+                      (string= (file-name-extension buffer-file-name) "rb"))
               (origami-mode +1))))
 
 ;; Set up origami-mode keybindings
@@ -101,8 +103,9 @@
             (define-key origami-mode-map (kbd "C-'")
               'origami-toggle-node)))
 
-;; Enable Web Mode automatically for JS & JSX files (for React)
+;; Enable Web Mode automatically for JS & JSX files (for React) & Svelte files
 (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.svelte?$" . web-mode))
 ;; And add syntax highlighting
 (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
 ;; 2-space indentation default
