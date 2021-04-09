@@ -29,9 +29,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/Dropbox/org/sfr3.org")))
  '(package-selected-packages
    (quote
-    (dash projectile yaml-mode emmet-mode exec-path-from-shell add-node-modules-path flycheck web-mode scss-mode sass-mode projectile-rails paradox origami markdown-mode helm-projectile fill-column-indicator coffee-mode)))
+    (solidity-mode dash projectile yaml-mode emmet-mode exec-path-from-shell add-node-modules-path flycheck web-mode scss-mode sass-mode projectile-rails paradox origami markdown-mode helm-projectile fill-column-indicator coffee-mode)))
  '(paradox-automatically-star t))
 
 (custom-set-faces
@@ -152,3 +153,13 @@
                                         ;                  "--print-config" (buffer-file-name))
       (eq exitcode 0)))
   )
+
+;; Disable incessant beeping when scrolling to the top or bottom of a document
+;; https://stackoverflow.com/questions/11679700/emacs-disable-beep-when-trying-to-move-beyond-the-end-of-the-document
+(defun my-bell-function ()
+  (unless (memq this-command
+                '(isearch-abort abort-recursive-edit exit-minibuffer
+                                keyboard-quit mwheel-scroll down up next-line previous-line
+                                backward-char forward-char))
+    (ding)))
+(setq ring-bell-function 'my-bell-function)
