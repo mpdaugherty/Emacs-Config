@@ -89,12 +89,14 @@
      )))
 (put 'upcase-region 'disabled nil)
 
-;; Enable origami code folding for *.js, *.svelte, *.rb files
+;; Enable origami code folding for files witht extensions *.js, *.<etc>
 (add-hook 'find-file-hook
           (lambda ()
             (when (or (string= (file-name-extension buffer-file-name) "js")
                       (string= (file-name-extension buffer-file-name) "svelte")
-                      (string= (file-name-extension buffer-file-name) "rb"))
+                      (string= (file-name-extension buffer-file-name) "rb")
+                      (string= (file-name-extension buffer-file-name) "sol")
+                      (string= (file-name-extension buffer-file-name) "el"))
               (origami-mode +1))))
 
 ;; Set up origami-mode keybindings
